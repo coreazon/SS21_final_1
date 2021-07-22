@@ -35,7 +35,7 @@ public class SolutionText {
 
         var longestCommonSubstring = new int[lengthFirstText][lengthSecondText];
         int endIndex = -1;
-        //find the LCS
+        //find the longest common substring
         for (var i = 0; i < lengthFirstText; i++) {
             for (var j = 0; j < lengthSecondText; j++) {
                 //no match -> don't need to for subsequence

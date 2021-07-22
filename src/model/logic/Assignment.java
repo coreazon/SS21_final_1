@@ -9,6 +9,8 @@ import errors.SemanticsException;
 import model.logic.users.Plagiarism;
 import model.logic.users.Student;
 
+
+
 /**
  * This class models an assignment
  *
@@ -62,6 +64,14 @@ public class Assignment implements Comparable<Assignment> {
         return null;
     }
 
+    private boolean checkIfStudentHasCorrection(Student student) throws SemanticsException {
+        for (EvaluationAndSolution evaluationAndSolution : evaluationAndSolutions){
+            if (evaluationAndSolution.getStudent().equals(student))
+                if (!evaluationAndSolution.isCorrected()) return false;
+        }
+        return true;
+    }
+
     /**
      * function that adds a students solution to the set
      *
@@ -72,6 +82,7 @@ public class Assignment implements Comparable<Assignment> {
 
         //check if students exists in Set
         var possibleStudentSolution = checkIfStudentHasSubmitSolution(studentSolution.getStudent());
+        if (hasCorrection()) throw new SemanticsException(Errors.NO_SUBMIT_ALLOWED);
         if (possibleStudentSolution != null) {
             possibleStudentSolution.changeSolution(studentSolution.getSolutionText());
             return;
@@ -128,6 +139,7 @@ public class Assignment implements Comparable<Assignment> {
     public void reviewSolution(Student student, Correction correction) throws SemanticsException {
         var studentSolution = checkIfStudentHasSubmitSolution(student);
         if (studentSolution == null) throw new SemanticsException(Errors.SOLUTION_DOES_NOT_EXIST);
+
         studentSolution.reviewSolution(correction);
 
     }
@@ -142,7 +154,7 @@ public class Assignment implements Comparable<Assignment> {
     public String markPlagiarism(Student student) throws SemanticsException {
         var solution = checkIfStudentHasSubmitSolution(student);
         if (solution == null) throw new SemanticsException(Errors.NO_SOLUTION);
-
+        if (!checkIfStudentHasCorrection(student)) throw new SemanticsException(Errors.NOT_EVALUATED);
         var newGrade = solution.markPlagiarism();
 
         if (newGrade == -1) {
@@ -159,14 +171,17 @@ public class Assignment implements Comparable<Assignment> {
      * @return String representation for the list review command
      */
     public String listReviews() {
-        var outputReview = new StringBuilder();
-
+        Set<EvaluationAndSolution> reviews = new TreeSet<>(EvaluationAndSolution::compareToTutor);
         for (EvaluationAndSolution evaluationAndSolution : evaluationAndSolutions) {
             if (!evaluationAndSolution.isCorrected()) continue;
-            outputReview.append(evaluationAndSolution).append(System.lineSeparator());
+            reviews.add(evaluationAndSolution);
         }
-        return outputReview.deleteCharAt(outputReview.length() - 1).toString();
 
+        var outputBuilder = new StringBuilder();
+        for (EvaluationAndSolution evaluationAndSolution : reviews){
+            outputBuilder.append(evaluationAndSolution.toString()).append(System.lineSeparator());
+        }
+        return outputBuilder.deleteCharAt(outputBuilder.length() - 1).toString();
     }
 
     /**
@@ -176,6 +191,7 @@ public class Assignment implements Comparable<Assignment> {
      */
     public String listSolutions() {
         var outputSolution = new StringBuilder();
+
         for (EvaluationAndSolution studentSolution : evaluationAndSolutions) {
             outputSolution.append(studentSolution.studentSolutionToString()).append(System.lineSeparator());
         }
@@ -208,6 +224,13 @@ public class Assignment implements Comparable<Assignment> {
             outputString.append(plagiarism.toString()).append(System.lineSeparator());
         }
         return outputString.deleteCharAt(outputString.length() - 1).toString();
+    }
+
+    private boolean hasCorrection(){
+        for (EvaluationAndSolution evaluationAndSolution : evaluationAndSolutions){
+            if (evaluationAndSolution.isCorrected()) return true;
+        }
+        return false;
     }
 
     /**

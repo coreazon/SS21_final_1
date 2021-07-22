@@ -15,7 +15,7 @@ public abstract class User {
      *
      * @param name the name
      */
-    public User(Name name) {
+    protected User(Name name) {
         this.name = name;
     }
 

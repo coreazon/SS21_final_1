@@ -173,6 +173,15 @@ public class EvaluationAndSolution implements Comparable<EvaluationAndSolution> 
     @Override
     public int compareTo(EvaluationAndSolution o) {
         return student.compareTo(o.getStudent());
-
     }
+
+    public int compareToTutor(EvaluationAndSolution o){
+        var firstTutor = correction.getTutor();
+        var secondTutor = o.correction.getTutor();
+        if (firstTutor.compareTo(secondTutor) == 0){
+            return student.compareTo(o.getStudent());
+        }
+        return firstTutor.compareTo(secondTutor);
+    }
+
 }

@@ -64,6 +64,26 @@ public class Errors {
      * Error-Message which gets thrown when an evaluation already exists
      */
     public static final String ALREADY_EVALUATED = "already evaluated";
+    /**
+     * Error-Message which gets thrown when the name already exists
+     */
+    public static final String NAME_TAKEN = "the name is already taken";
+    /**
+     * Error-Message which gets thrown when there is no instructor
+     */
+    public static final String NO_INSTRUCTOR = "there is no instructor";
+    /**
+     * Error-Message which gets thrown when a submission is not allowed
+     */
+    public static final String NO_SUBMIT_ALLOWED = "no more submission allowed";
+    /**
+     * Error-Message which gets thrown when there is only one student
+     */
+    public static final String ONLY_ONE_STUDENT = "there is only one student";
+    /**
+     * Error-Message which gets thrown when there is no assignment
+     */
+    public static final String NO_ASSIGNMENT = "there is no assignment";
 
     private Errors() throws IllegalAccessException {
         throw new IllegalStateException("Utility-class Constructor");

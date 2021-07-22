@@ -89,7 +89,7 @@ public class CommandParserExecute implements CommandParser {
     /**
      * any name
      */
-    public static final String NAME = "[a-zA-Z]\\S+";
+    public static final String NAME = "\\S+";
     /**
      * empty String
      */
@@ -154,7 +154,7 @@ public class CommandParserExecute implements CommandParser {
     /**
      * regex of the student command
      */
-    public static final String REGEX_STUDENT_COMMAND = STUDENT_COMMAND + SPACE + "[A-Za-z]+" + SPACE + MATRICULATION;
+    public static final String REGEX_STUDENT_COMMAND = STUDENT_COMMAND + SPACE + NAME + SPACE + MATRICULATION;
     /**
      * regex of the assignment command
      */

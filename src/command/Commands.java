@@ -111,7 +111,15 @@ public enum Commands {
     ASSIGNMENT(CommandParserExecute.ASSIGNMENT_COMMAND, CommandParserExecute.REGEX_ASSIGNMENT_COMMAND) {
         @Override
         public Result executeCommand(List<String> parameters, ApollonHandler apollonHandler) {
-            return new Result(Result.ResultType.SUCCESS, apollonHandler.addAssignmentCommand(new TextOfAssignment(parameters.get(0))));
+
+            String resultMessage;
+
+            try{
+                resultMessage = apollonHandler.addAssignmentCommand(new TextOfAssignment(parameters.get(0)));
+            }catch (TaskException e){
+                return new Result(Result.ResultType.FAILURE, e.getMessage());
+            }
+            return new Result(Result.ResultType.SUCCESS, resultMessage);
 
         }
     },
@@ -231,7 +239,6 @@ public enum Commands {
     SUMMARY_TASKS(CommandParserExecute.SUMMARY_TASKS_COMMAND, CommandParserExecute.REGEX_SUMMARY_TASKS_COMMAND) {
         @Override
         public Result executeCommand(List<String> parameters, ApollonHandler apollonHandler) {
-
             return new Result(Result.ResultType.SUCCESS, apollonHandler.summaryTasksCommand());
         }
     },

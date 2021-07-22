@@ -1,5 +1,6 @@
 package model.logic;
 
+import model.logic.users.Instructor;
 import model.logic.users.Tutor;
 
 /**
@@ -8,7 +9,7 @@ import model.logic.users.Tutor;
  * @author urliz
  * @version 1.0
  */
-public class Correction {
+public class Correction implements Comparable<Correction>{
 
     private static final String COLON = ":";
     private static final String SPACE = " ";
@@ -57,6 +58,9 @@ public class Correction {
         return grade.getGradeNumber();
     }
 
+    public Tutor getTutor() {
+        return tutor;
+    }
 
     /**
      * String representation of a correction
@@ -82,4 +86,10 @@ public class Correction {
         return correction.tutor.equals(tutor);
 
     }
+
+    @Override
+    public int compareTo(Correction correction) {
+        return tutor.toString().compareTo(correction.getTutor().toString());
+    }
+
 }

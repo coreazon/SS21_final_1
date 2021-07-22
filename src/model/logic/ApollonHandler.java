@@ -63,6 +63,7 @@ public class ApollonHandler {
     public String addInstructorCommand(Instructor instructor) throws SemanticsException {
         //check if instructor name exists
         if (instructorSet.contains(instructor)) throw new SemanticsException(Errors.INSTRUCTOR_EXISTS);
+        if (tutorSet.contains(new Tutor(instructor.getName()))) throw new SemanticsException(Errors.NAME_TAKEN);
         instructorSet.add(instructor);
 
         return SUCCESS_WITHOUT_MESSAGE;
@@ -95,6 +96,7 @@ public class ApollonHandler {
     public String addTutorCommand(Tutor tutor) throws SemanticsException {
         //check if tutor name exists
         if (tutorSet.contains(tutor)) throw new SemanticsException(Errors.TUTOR_EXISTS);
+        if (instructorSet.contains(new Instructor(tutor.getName()))) throw new SemanticsException(Errors.NAME_TAKEN);
         tutorSet.add(tutor);
 
         return SUCCESS_WITHOUT_MESSAGE;
@@ -153,7 +155,9 @@ public class ApollonHandler {
      * @param textOfAssignment the assignment
      * @return the assignment and its id
      */
-    public String addAssignmentCommand(TextOfAssignment textOfAssignment) {
+    public String addAssignmentCommand(TextOfAssignment textOfAssignment) throws SemanticsException {
+
+        if (instructorSet.isEmpty()) throw new SemanticsException(Errors.NO_INSTRUCTOR);
 
         var newAssignment = new Assignment(textOfAssignment, assignmentCounter);
         assignmentSet.add(newAssignment);
@@ -175,6 +179,7 @@ public class ApollonHandler {
         var newAssignment = findAssignment(assignmentID);
         //check if students exists        
         var newStudent = findStudent(matriculation);
+
         newAssignment.submitSolution(new StudentSolution(newStudent, solutionText));
 
         return SUCCESS_WITHOUT_MESSAGE;
@@ -232,8 +237,9 @@ public class ApollonHandler {
      * @return the assignmentID, the assignment name, the average, the number of Solution evaluated and the number of
      * solutions submitted
      */
-    public String summaryTasksCommand() {
+    public String summaryTasksCommand(){
         var outputBuilder = new StringBuilder();
+        if (assignmentSet.isEmpty()) return SUCCESS_WITHOUT_MESSAGE;
         for (Assignment assignment : assignmentSet) {
             outputBuilder.append(assignment.toString()).append(System.lineSeparator());
         }
@@ -280,4 +286,5 @@ public class ApollonHandler {
     private Assignment findAssignment(int assignmentID) throws SemanticsException {
         return assignmentSet.stream().filter(assignment -> assignment.getIdAssignment() == assignmentID).findFirst().orElseThrow(() -> new SemanticsException(Errors.ASSIGNMENT_DOES_NOT_EXISTS));
     }
+
 }
