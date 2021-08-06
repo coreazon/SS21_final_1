@@ -26,7 +26,7 @@ public class Assignment implements Comparable<Assignment> {
     private static final String MARKED_AS_PLAGIARISM = "marked as plagiarism";
     private static final String REMOVED_AND_GRADE = "removed and grade";
     private static final String RESTORED = "restored";
-    private static final String BRACKETS = "[%s, %s / %s]";
+    private static final String FORMATTER = "[%s, %s / %s]";
     private static final String HYPHEN = "-";
     private static final String ASSIGNMENT_INFORMATION = "assignment id(%d)";
     private static final String FORMAT_DECIMAL = "%.2f";
@@ -241,7 +241,7 @@ public class Assignment implements Comparable<Assignment> {
     @Override
     public String toString() {
         return idAssignment + COLON + SPACE + textOfAssignment.toString() + SPACE
-                + String.format(BRACKETS, calculateGradePointAverage(), numberOfCorrections(), numberOfSubmissions());
+                + String.format(FORMATTER, calculateGradePointAverage(), numberOfCorrections(), numberOfSubmissions());
     }
 
     /**

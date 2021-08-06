@@ -14,9 +14,9 @@ import java.util.Objects;
  */
 public class EvaluationAndSolution implements Comparable<EvaluationAndSolution> {
 
-    private static final String BRACKETS = "[";
+    private static final String OPEN_GROUP = "[";
     private static final String COMMA = ",";
-    private static final String BRACKETS_CLOSE = "]";
+    private static final String END_GROUP = "]";
     private static final String SPACE = " ";
     private final Student student;
     private final StudentSolution studentSolution;
@@ -136,8 +136,8 @@ public class EvaluationAndSolution implements Comparable<EvaluationAndSolution> 
      */
     @Override
     public String toString() {
-        return correction.toString() + SPACE + BRACKETS + student
-                .getMatriculationNumber().getMatriculationNumber() + COMMA + SPACE + correction.getGradeNumber() + BRACKETS_CLOSE;
+        return correction.toString() + SPACE + OPEN_GROUP + student
+                .getMatriculationNumber().getMatriculationNumber() + COMMA + SPACE + correction.getGradeNumber() + END_GROUP;
     }
 
     /**

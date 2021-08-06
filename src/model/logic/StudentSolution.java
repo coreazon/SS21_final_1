@@ -11,7 +11,7 @@ import model.logic.users.Student;
 public class StudentSolution implements Comparable<StudentSolution> {
 
     private static final String SPACE = " ";
-    private static final String OPEN_BRACKETS = "(%d)";
+    private static final String FORMATTER = "(%d)";
     private static final String COLON = ":";
     private final Student student;
     private SolutionText solutionText;
@@ -61,7 +61,7 @@ public class StudentSolution implements Comparable<StudentSolution> {
      */
     @Override
     public String toString() {
-        return student.getName().toString() + SPACE + String.format(OPEN_BRACKETS,
+        return student.getName().toString() + SPACE + String.format(FORMATTER,
                 student.getMatriculationNumber().getMatriculationNumber())
                 + COLON + SPACE + solutionText.toString();
     }

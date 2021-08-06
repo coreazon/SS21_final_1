@@ -9,8 +9,8 @@ package model.logic.users;
 public class Student extends User implements Comparable<Student> {
 
     private static final String SPACE = " ";
-    private static final String OPEN_BRACKETS = "(";
-    private static final String CLOSE_BRACKETS = ")";
+    private static final String OPEN_GROUP = "(";
+    private static final String CLOSE_GROUP = ")";
     private final Matriculation matriculationNumber;
 
     /**
@@ -40,7 +40,7 @@ public class Student extends User implements Comparable<Student> {
      */
     @Override
     public String toString() {
-        return super.getName() + SPACE + OPEN_BRACKETS + matriculationNumber.toString() + CLOSE_BRACKETS;
+        return super.getName() + SPACE + OPEN_GROUP + matriculationNumber.toString() + CLOSE_GROUP;
     }
 
     /**

@@ -207,7 +207,8 @@ public class ApollonHandler {
      * @return an empty String if it was successful
      * @throws SemanticsException If the command does not meet the requirements
      */
-    public String reviewCommand(Tutor tutor, int assignmentID, Matriculation matriculation, Grade grade, CorrectionText correctionText) throws SemanticsException {
+    public String reviewCommand(Tutor tutor, int assignmentID, Matriculation matriculation,
+                                Grade grade, CorrectionText correctionText) throws SemanticsException {
         //check tutor
         var correctionTutor = findTutor(tutor);
         //check assignment 

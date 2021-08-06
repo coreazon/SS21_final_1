@@ -44,7 +44,8 @@ public enum Commands {
     /**
      * the list-instructors command
      */
-    LIST_INSTRUCTORS(CommandParserExecute.LIST_INSTRUCTORS_COMMAND, CommandParserExecute.REGEX_LIST_INSTRUCTORS_COMMAND) {
+    LIST_INSTRUCTORS(CommandParserExecute.LIST_INSTRUCTORS_COMMAND,
+            CommandParserExecute.REGEX_LIST_INSTRUCTORS_COMMAND) {
         @Override
         public Result executeCommand(List<String> parameters, ApollonHandler apollonHandler) {
 
@@ -86,7 +87,8 @@ public enum Commands {
             String resultMessage;
 
             try {
-                resultMessage = apollonHandler.addStudentCommand(new Student(new Name(parameters.get(0)), new Matriculation(Integer.parseInt(parameters.get(1)))));
+                resultMessage = apollonHandler.addStudentCommand(new Student(new Name(parameters.get(0)),
+                        new Matriculation(Integer.parseInt(parameters.get(1)))));
             } catch (TaskException e) {
                 return new Result(Result.ResultType.FAILURE, e.getMessage());
             }
@@ -132,7 +134,8 @@ public enum Commands {
             String resultMessage;
 
             try {
-                resultMessage = apollonHandler.submitCommand(Integer.parseInt(parameters.get(0)), new Matriculation(Integer.parseInt(parameters.get(1))), new SolutionText(parameters.get(2)));
+                resultMessage = apollonHandler.submitCommand(Integer.parseInt(parameters.get(0)),
+                        new Matriculation(Integer.parseInt(parameters.get(1))), new SolutionText(parameters.get(2)));
             } catch (TaskException e) {
                 return new Result(Result.ResultType.FAILURE, e.getMessage());
             }
@@ -166,7 +169,8 @@ public enum Commands {
             String resultMessage;
 
             try {
-                resultMessage = apollonHandler.reviewCommand(new Tutor(new Name(parameters.get(0))), Integer.parseInt(parameters.get(1)),
+                resultMessage = apollonHandler.reviewCommand(new Tutor(new Name(parameters.get(0))),
+                        Integer.parseInt(parameters.get(1)),
                         new Matriculation(Integer.parseInt(parameters.get(2))),
                         Grade.findGradeThroughInt(Integer.parseInt(parameters.get(3))),
                         new CorrectionText(parameters.get(4)));
@@ -199,7 +203,8 @@ public enum Commands {
     /**
      * the searchPlagiarism command
      */
-    SEARCH_PLAGIARISM(CommandParserExecute.SEARCH_PLAGIARISM_COMMAND, CommandParserExecute.REGEX_SEARCH_PLAGIARISM_COMMAND) {
+    SEARCH_PLAGIARISM(CommandParserExecute.SEARCH_PLAGIARISM_COMMAND,
+            CommandParserExecute.REGEX_SEARCH_PLAGIARISM_COMMAND) {
         @Override
         public Result executeCommand(List<String> parameters, ApollonHandler apollonHandler) {
             String resultMessage;

@@ -162,11 +162,13 @@ public class CommandParserExecute implements CommandParser {
     /**
      * regex of the submit command
      */
-    public static final String REGEX_SUBMIT_COMMAND = SUBMIT_COMMAND + SPACE + ID + SPACE + MATRICULATION + SPACE + TEXT;
+    public static final String REGEX_SUBMIT_COMMAND = SUBMIT_COMMAND + SPACE + ID + SPACE + MATRICULATION + SPACE
+            + TEXT;
     /**
      * regex of the MARK_PLAGIARISM_COMMAND command
      */
-    public static final String REGEX_MARK_PLAGIARISM_COMMAND = MARK_PLAGIARISM_COMMAND + SPACE + NAME + SPACE + MATRICULATION + SPACE + ID;
+    public static final String REGEX_MARK_PLAGIARISM_COMMAND = MARK_PLAGIARISM_COMMAND + SPACE + NAME + SPACE
+            + MATRICULATION + SPACE + ID;
     /**
      * regex of the search-plagiarism command
      */
@@ -178,7 +180,8 @@ public class CommandParserExecute implements CommandParser {
     /**
      * regex of the review command
      */
-    public static final String REGEX_REVIEW_COMMAND = REVIEW_COMMAND + SPACE + NAME + SPACE + ID + SPACE + MATRICULATION + SPACE + GRADE + SPACE + TEXT;
+    public static final String REGEX_REVIEW_COMMAND = REVIEW_COMMAND + SPACE + NAME + SPACE + ID + SPACE
+            + MATRICULATION + SPACE + GRADE + SPACE + TEXT;
     /**
      * regex of the list-reviews command
      */
